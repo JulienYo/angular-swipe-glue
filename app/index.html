@@ -30,21 +30,20 @@
         <p>
           Swipe items
         </p>
-        <div>
-          <div>
-            <ul glue>
-              <li>A</li>
-              <li>B</li>
-              <li>C</li>
-              <li>D</li>
-              <li>E</li>
-              <li>F</li>
-            </ul>
-          </div>
+        
+        <div class="container">
+          <span class="left" ng-click="index > 0 ? (index=index-1) : ''">&lt;</span>
+          <ul glue glue-index="index">
+            <li>A</li>
+            <li>B</li>
+            <li>C</li>
+            <li>D</li>
+            <li>E</li>
+            <li>F</li>
+          </ul>
+          <span class="right" ng-click="index=index+1">&gt;</span>
         </div>
-        <div>
-          {{action}}
-        </div>
+        
       </div>
     </div>
 
@@ -56,17 +55,10 @@
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-resource/angular-resource.js"></script>
-    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-        <!-- endbuild -->
+    <script src="angular-swipe-glue.js"></script>
 </body>
 </html>

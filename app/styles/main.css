@@ -1,9 +1,3 @@
-/* Space out content a bit */
-body {
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-
 ul {
   list-style-type: none;
   text-align: center;
@@ -29,7 +23,15 @@ li {
   margin-top: 50px;
 }
 
-.glue {
+.container {
   width: 606px;
   overflow: hidden;
+}
+
+span.left {
+  cursor: pointer;
+}
+
+span.right {
+  cursor: pointer;
 }
