@@ -1,0 +1,35 @@
+/* Space out content a bit */
+body {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+ul {
+  list-style-type: none;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  width: 1212px;
+
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+
+li {
+  float: left;
+  background-color: #DDF;
+  border: 1px solid black;
+
+  width: 200px;
+  height: 100px;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.glue {
+  width: 606px;
+  overflow: hidden;
+}
