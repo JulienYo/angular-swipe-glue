@@ -3,13 +3,14 @@ ul {
   text-align: center;
   padding: 0;
   margin: 0;
+  z-index: -1; 
   width: 1212px;
 
-  -webkit-transition: all 0.5s ease-in-out;
-  -moz-transition: all 0.5s ease-in-out;
-  -o-transition: all 0.5s ease-in-out;
-  -ms-transition: all 0.5s ease-in-out;
-  transition: all 0.5s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 li {
@@ -18,20 +19,22 @@ li {
   border: 1px solid black;
 
   width: 200px;
-  height: 100px;
+  height: 400px;
   text-align: center;
   margin-top: 50px;
 }
 
-.container {
+.glue-container {
   width: 606px;
   overflow: hidden;
 }
 
-span.left {
+.left {
+  padding: 50px;
   cursor: pointer;
 }
 
-span.right {
+.right {
+  padding: 50px;
   cursor: pointer;
 }

@@ -2,6 +2,8 @@
 
 Swipe items horizontaly and try to reach nearest item smoothly.
 
+**Not working, still ongoing**
+
 ## Usage:
 
     <ul glue>
@@ -12,6 +14,12 @@ Swipe items horizontaly and try to reach nearest item smoothly.
       <li>E</li>
       <li>F</li>
     </ul>
+
+## Test
+
+Sample exemple available
+
+    grunt serve
 
 ## Todo:
 

@@ -30,18 +30,19 @@
         <p>
           Swipe items
         </p>
-        
-        <div class="container">
-          <span class="left" ng-click="index > 0 ? (index=index-1) : ''">&lt;</span>
-          <ul glue glue-index="index">
-            <li>A</li>
-            <li>B</li>
-            <li>C</li>
-            <li>D</li>
-            <li>E</li>
-            <li>F</li>
-          </ul>
-          <span class="right" ng-click="index=index+1">&gt;</span>
+        <div class="row">
+          <div class="col-sm-1 left" ng-click="index > 0 ? (index=index-1) : ''">&lt;</div>
+          <div class="col-sm-10 glue-container">
+            <ul glue glue-index="index">
+              <li>A</li>
+              <li>B</li>
+              <li>C</li>
+              <li>D</li>
+              <li>E</li>
+              <li>F</li>
+            </ul>
+          </div>
+          <div class="col-sm-1 right" ng-click="index=index+1">&gt;</div>
         </div>
         
       </div>
