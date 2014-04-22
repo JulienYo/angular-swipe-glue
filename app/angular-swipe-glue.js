@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('angular-swipe-glue', ['ngTouch'])
-  .directive('glue', function($swipe) {
+  .directive('swipeGlue', function($swipe) {
     return {
       scope: {
-        glueIndex: '=?'
+        swipeIndex: '=?'
       },
       link: function (scope, element) {
         var ulWidth = 0,
@@ -45,22 +45,22 @@ angular.module('angular-swipe-glue', ['ngTouch'])
             console.log(liWidth);
           }
         });
-        scope.glueIndex = scope.glueIndex || 0;
+        scope.swipeIndex = scope.swipeIndex || 0;
         scope.$watch('glueIndex', move);
         var right = function() {
-          scope.glueIndex++;
-          console.log('right', scope.glueIndex);
+          scope.swipeIndex++;
+          console.log('right', scope.swipeIndex);
           move();
         };
         var left = function() {
-          console.log('left', scope.glueIndex);
-          if (scope.glueIndex > 0) { 
-            scope.glueIndex --;
+          console.log('left', scope.swipeIndex);
+          if (scope.swipeIndex > 0) { 
+            scope.swipeIndex --;
           }
           move();
         };
         function move() {
-          var moveX = scope.glueIndex * liWidth,
+          var moveX = scope.swipeIndex * liWidth,
             translate = "translateX(-"+moveX+"px)";
           element.css({
             '-webkit-transform': translate,
