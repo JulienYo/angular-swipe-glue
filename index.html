@@ -1,0 +1,54 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css({.tmp,app}) styles/main.css -->
+    <link rel="stylesheet" href="app/styles/main.css">
+    <!-- endbuild -->
+  </head>
+  <body ng-app="angular-swipe-glue">
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- Add your site or application content here -->
+    <div ng-view="">
+      <div>
+        <h1>angular-swipe-glue</h1>
+        <p>
+          Swipe items
+        </p>
+        <div class="row">
+          <div class="col-sm-1 left" ng-click="index > 0 ? (index=index-1) : ''">&lt;</div>
+          <div class="col-sm-10 glue-container">
+            <ul glue glue-index="index">
+              <li>A</li>
+              <li>B</li>
+              <li>C</li>
+              <li>D</li>
+              <li>E</li>
+              <li>F</li>
+            </ul>
+          </div>
+          <div class="col-sm-1 right" ng-click="index=index+1">&gt;</div>
+        </div>
+        
+      </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular-touch.min.js"></script>
+    <script src="app/angular-swipe-glue.js"></script>
+</body>
+</html>
