@@ -8,6 +8,7 @@ angular.module('angular-swipe-glue', ['ngTouch'])
       },
       link: function (scope, element) {
         var ulWidth = 0,
+          ulHeight = 0,
           liWidth = 0,
           startMove = 0;
 
@@ -21,46 +22,64 @@ angular.module('angular-swipe-glue', ['ngTouch'])
           },
           'move': function(coords) {
             console.log('move', coords);
-            //move(coords.x);
+            /*var newX = startMove - coords.x;
+            if (newX) {
+              move(newX);
+              startMove = newX;
+            }*/
           },
           'end': function(coords) {
             console.log('end', coords);
-            if (startMove - coords.x >= 0) {
-              right();
-            } else {
-              left();
-            }
-            startMove = 0;
+            scope.$apply(function() {
+              if (startMove - coords.x > 0) {
+                scope.swipeRight();
+              } else {
+                scope.swipeLeft();
+              }
+              startMove = 0;
+            });
           }
         };
         $swipe.bind(element, handlers);
 
-        scope.$watch(function() {
-          return element[0].clientWidth;
-        }, function(width) {
-          console.log(width);
-          ulWidth = width;
-          if (element.children && element.children.length > 0) {
-            liWidth = element.children()[0].clientWidth;
-            console.log(liWidth);
+        if (element.children && element.children.length > 0) {
+          var li;
+          liWidth = element.children()[0].offsetWidth;
+
+          for (var i=0;i<element.children().length;i++) {
+            li = element.children()[i];
+            ulWidth += li.offsetWidth;
+            if (ulHeight < li.offsetHeight) {
+              ulHeight = li.offsetHeight;
+            }
           }
+          element.addClass('swipe-glue');
+          element.css({width: ulWidth + 'px', height: ulHeight + 'px'});
+        }
+
+        if (angular.isUndefined(scope.swipeIndex)) {
+          scope.swipeIndex = 0;
+        }
+
+        scope.$watch('swipeIndex', function() {
+          move();
         });
-        scope.swipeIndex = scope.swipeIndex || 0;
-        scope.$watch('glueIndex', move);
-        var right = function() {
-          scope.swipeIndex++;
-          console.log('right', scope.swipeIndex);
+
+        scope.swipeRight = function () {
+          console.log('index', scope.swipeIndex);
+          scope.swipeIndex = scope.swipeIndex + 1;
           move();
-        };
-        var left = function() {
-          console.log('left', scope.swipeIndex);
+        }
+        scope.swipeLeft = function () {
           if (scope.swipeIndex > 0) { 
-            scope.swipeIndex --;
+            console.log('index', scope.swipeIndex);
+            scope.swipeIndex = scope.swipeIndex - 1;
           }
           move();
-        };
-        function move() {
-          var moveX = scope.swipeIndex * liWidth,
+        }
+        function move(x) {
+          console.log('index', scope.swipeIndex);
+          var moveX = x || (scope.swipeIndex * liWidth),
             translate = "translateX(-"+moveX+"px)";
           element.css({
             '-webkit-transform': translate,

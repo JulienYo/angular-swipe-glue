@@ -1,40 +1,28 @@
 ul {
-  list-style-type: none;
   text-align: center;
-  padding: 0;
-  margin: 0;
-  z-index: -1; 
-  width: 1212px;
-
-  -webkit-transition: all 0.1s ease-in-out;
-  -moz-transition: all 0.1s ease-in-out;
-  -o-transition: all 0.1s ease-in-out;
-  -ms-transition: all 0.1s ease-in-out;
-  transition: all 0.1s ease-in-out;
 }
 
 li {
-  float: left;
+  width: 200px;
+  height: 200px;
   background-color: #DDF;
   border: 1px solid black;
-
-  width: 200px;
-  height: 400px;
-  text-align: center;
-  margin-top: 50px;
 }
 
 .glue-container {
   width: 606px;
-  overflow: hidden;
+  overflow-x: hidden;
+  text-align: center;
 }
 
 .left {
-  padding: 50px;
+  padding: 10px 50px 10px 50px;
+  float: left;
   cursor: pointer;
 }
 
 .right {
-  padding: 50px;
+  padding: 10px 50px 10px 50px;
+  float: right;
   cursor: pointer;
 }

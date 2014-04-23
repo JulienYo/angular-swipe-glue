@@ -16,6 +16,7 @@
     <!-- endbuild -->
     <!-- build:css({.tmp,app}) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="angular-swipe-glue.css">
     <!-- endbuild -->
   </head>
   <body ng-app="angular-swipe-glue">
@@ -24,27 +25,19 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div ng-view="">
-      <div>
-        <h1>angular-swipe-glue</h1>
-        <p>
-          Swipe items
-        </p>
-        <div class="row">
-          <div class="col-sm-1 left" ng-click="index > 0 ? (index=index-1) : ''">&lt;</div>
-          <div class="col-sm-10 glue-container">
-            <ul swipe-glue swipe-index="index">
-              <li>A</li>
-              <li>B</li>
-              <li>C</li>
-              <li>D</li>
-              <li>E</li>
-              <li>F</li>
-            </ul>
-          </div>
-          <div class="col-sm-1 right" ng-click="index=index+1">&gt;</div>
-        </div>
-        
+    <div>
+      <h1>angular-swipe-glue</h1>
+      <div class="glue-container">
+        <ul swipe-glue swipe-index="index">
+          <li>A</li>
+          <li>B</li>
+          <li>C</li>
+          <li>D</li>
+          <li>E</li>
+          <li>F</li>
+        </ul>
+        <input type="number" min="0" ng-model="index">
+        <span class="left" ng-click="index = (index > 0) ? (index-1) : 0">&lt;</span><span class="right" ng-click="index = index+1">&gt;</span>
       </div>
     </div>
 
