@@ -10,7 +10,9 @@ angular.module('angular-swipe-glue', ['ngTouch'])
         var ulWidth = 0,
           ulHeight = 0,
           liWidth = 0,
-          startMove = 0;
+          startMove = 0,
+          translateX = 0,
+          lastTranslateX = 0;
 
         var handlers = {
           'start': function(coords) {
@@ -22,21 +24,20 @@ angular.module('angular-swipe-glue', ['ngTouch'])
           },
           'move': function(coords) {
             console.log('move', coords);
-            /*var newX = startMove - coords.x;
-            if (newX) {
-              move(newX);
-              startMove = newX;
-            }*/
+            var newX = lastTranslateX + startMove - coords.x
+            if (newX >= 0) {
+              translateX =  newX;
+            }
+            element.removeClass('glue-animation');
+            move(translateX);
           },
           'end': function(coords) {
             console.log('end', coords);
+            startMove = 0;
+            element.addClass('glue-animation');
             scope.$apply(function() {
-              if (startMove - coords.x > 0) {
-                scope.swipeRight();
-              } else {
-                scope.swipeLeft();
-              }
-              startMove = 0;
+              scope.swipeIndex = Math.ceil(translateX / liWidth);
+              lastTranslateX = scope.swipeIndex * liWidth;
             });
           }
         };
@@ -66,19 +67,16 @@ angular.module('angular-swipe-glue', ['ngTouch'])
         });
 
         scope.swipeRight = function () {
-          console.log('index', scope.swipeIndex);
           scope.swipeIndex = scope.swipeIndex + 1;
           move();
         }
         scope.swipeLeft = function () {
           if (scope.swipeIndex > 0) { 
-            console.log('index', scope.swipeIndex);
             scope.swipeIndex = scope.swipeIndex - 1;
           }
           move();
         }
         function move(x) {
-          console.log('index', scope.swipeIndex);
           var moveX = x || (scope.swipeIndex * liWidth),
             translate = "translateX(-"+moveX+"px)";
           element.css({
