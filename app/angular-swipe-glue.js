@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angular-swipe-glue', ['ngTouch'])
-  .directive('swipeGlue', function($swipe) {
+  .directive('swipeGlue', function($swipe, $document) {
     return {
       scope: {
         swipeIndex: '=?'
@@ -10,50 +10,68 @@ angular.module('angular-swipe-glue', ['ngTouch'])
         var ulWidth = 0,
           ulHeight = 0,
           liWidth = 0,
+          liCount = 0,
           startMove = 0,
           translateX = 0,
-          lastTranslateX = 0;
+          lastTranslateX = 0,
+          canceled;
 
+        function documentMouseUpEvent(event) {
+          endSwipe({
+            x: event.clientX,
+            y: event.clientY
+          });
+          canceled = true;
+        }
+
+        //End handler
+        function endSwipe(coords) {
+          var swipedRight = startMove - coords.x <= 0;
+          startMove = 0;
+          scope.$apply(function() {
+            var index = Math.ceil(translateX / liWidth);
+            index = swipedRight ? index - 1 : index;
+            //Don't go further than li limits
+            if (index < 0) {
+              index = 0;
+            } else if (index >= liCount) {
+              index = liCount - 1;
+            }
+            var oldIndex = scope.swipeIndex;
+            scope.swipeIndex = index;
+            //Move, watch will do nothing
+            if (oldIndex === scope.swipeIndex) {
+              move();
+            }
+            $document.unbind('mouseup', documentMouseUpEvent);
+          });
+        }
+
+        //Swipe handlers
         var handlers = {
           'start': function(coords) {
-            console.log('start', coords);
             startMove = coords.x;
+            canceled = false;
+            $document.bind('mouseup', documentMouseUpEvent);
           },
           'cancel': function() {
-            console.log('cancel');
+            canceled = true;
           },
           'move': function(coords) {
-            console.log('move', coords);
-            var newX = lastTranslateX + startMove - coords.x
-            if (newX >= 0) {
-              translateX =  newX;
+            if (!canceled) {
+              translateX = scope.swipeIndex * liWidth + startMove - coords.x;
+              move(translateX);
             }
-            element.removeClass('glue-animation');
-            move(translateX);
           },
-          'end': function(coords) {
-            console.log('end', coords);
-            var swipedLeft;
-            if (startMove - coords.x <= 0) {
-              swipedLeft = true;
-            }
-            startMove = 0;
-            element.addClass('glue-animation');
-            scope.$apply(function() {
-              var index = Math.ceil(translateX / liWidth);
-              scope.swipeIndex = swipedLeft ? index - 1 : index;
-              if (scope.swipeIndex < 0) {
-                scope.swipeIndex = 0;
-              }
-              lastTranslateX = scope.swipeIndex * liWidth;
-            });
-          }
+          'end': endSwipe
         };
         $swipe.bind(element, handlers);
 
-        if (element.children && element.children.length > 0) {
+        //Init context
+        if (element.children && element.children().length > 0) {
           var li;
           liWidth = element.children()[0].offsetWidth;
+          liCount = element.children().length;
 
           for (var i=0;i<element.children().length;i++) {
             li = element.children()[i];
@@ -66,27 +84,31 @@ angular.module('angular-swipe-glue', ['ngTouch'])
           element.css({width: ulWidth + 'px', height: ulHeight + 'px'});
         }
 
-        if (angular.isUndefined(scope.swipeIndex)) {
+        //Init index
+        if (angular.isUndefined(scope.swipeIndex) || scope.swipeIndex < 0 || scope.swipeIndex >= liCount) {
           scope.swipeIndex = 0;
         }
 
-        scope.$watch('swipeIndex', function() {
-          move();
+        //Move on index update
+        scope.$watch('swipeIndex', function(newValue, oldValue) {
+          if (scope.swipeIndex < 0 || scope.swipeIndex >= liCount) {
+            scope.swipeIndex = oldValue;
+          }
+          else {
+            move();
+          }
         });
 
-        scope.swipeRight = function () {
-          scope.swipeIndex = scope.swipeIndex + 1;
-          move();
-        }
-        scope.swipeLeft = function () {
-          if (scope.swipeIndex > 0) { 
-            scope.swipeIndex = scope.swipeIndex - 1;
-          }
-          move();
-        }
+        //Animate
         function move(x) {
           var moveX = x || (scope.swipeIndex * liWidth),
-            translate = "translateX(-"+moveX+"px)";
+            translate = "translateX("+(-moveX)+"px)";
+          if (x) {
+            element.removeClass('glue-animation');
+          }
+          else {
+            element.addClass('glue-animation');
+          }
           element.css({
             '-webkit-transform': translate,
             '-moz-transform': translate,

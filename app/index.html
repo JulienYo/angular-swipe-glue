@@ -28,7 +28,7 @@
     <div>
       <h1>angular-swipe-glue</h1>
       <div class="glue-container">
-        <ul draggable="false" swipe-glue swipe-index="index">
+        <ul swipe-glue swipe-index="index">
           <li>A</li>
           <li>B</li>
           <li>C</li>
@@ -36,8 +36,19 @@
           <li>E</li>
           <li>F</li>
         </ul>
-        <input type="number" min="0" ng-model="index">
-        <span class="left" ng-click="index = (index > 0) ? (index-1) : 0">&lt;</span><span class="right" ng-click="index = index+1">&gt;</span>
+        index: <input type="number" min="0" ng-model="index">
+        <span class="left" ng-click="index = index-1">&lt;</span><span class="right" ng-click="index = index+1">&gt;</span>
+      </div>
+      <a href="#" ng-click="go = !go">Works behind a ng-show/hide (click to show)</a>
+      <div class="glue-container">
+        <ul ng-show="go" swipe-glue swipe-index="index">
+          <li>A</li>
+          <li>B</li>
+          <li>C</li>
+          <li>D</li>
+          <li>E</li>
+          <li>F</li>
+        </ul>
       </div>
     </div>
 
