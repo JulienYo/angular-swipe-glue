@@ -68,20 +68,22 @@ angular.module('angular-swipe-glue', ['ngTouch'])
         $swipe.bind(element, handlers);
 
         //Init context
-        if (element.children && element.children().length > 0) {
-          var li;
-          liWidth = element.children()[0].offsetWidth;
-          liCount = element.children().length;
+        function initContext () {
+          if (element.children && element.children().length > 0) {
+            var li;
+            liWidth = element.children()[0].offsetWidth;
+            liCount = element.children().length;
 
-          for (var i=0;i<element.children().length;i++) {
-            li = element.children()[i];
-            ulWidth += li.offsetWidth;
-            if (ulHeight < li.offsetHeight) {
-              ulHeight = li.offsetHeight;
+            for (var i=0;i<element.children().length;i++) {
+              li = element.children()[i];
+              ulWidth += li.offsetWidth;
+              if (ulHeight < li.offsetHeight) {
+                ulHeight = li.offsetHeight;
+              }
             }
+            element.addClass('swipe-glue');
+            element.css({width: ulWidth + 'px', height: ulHeight + 'px'});
           }
-          element.addClass('swipe-glue');
-          element.css({width: ulWidth + 'px', height: ulHeight + 'px'});
         }
 
         //Init index
@@ -97,6 +99,12 @@ angular.module('angular-swipe-glue', ['ngTouch'])
           else {
             move();
           }
+        });
+
+        scope.$watch(function() {
+          return element.children()[0] && element.children()[0].offsetWidth;
+        }, function() {
+          initContext();
         });
 
         //Animate
