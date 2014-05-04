@@ -33,10 +33,18 @@ angular.module('angular-swipe-glue', ['ngTouch'])
           },
           'end': function(coords) {
             console.log('end', coords);
+            var swipedLeft;
+            if (startMove - coords.x <= 0) {
+              swipedLeft = true;
+            }
             startMove = 0;
             element.addClass('glue-animation');
             scope.$apply(function() {
-              scope.swipeIndex = Math.ceil(translateX / liWidth);
+              var index = Math.ceil(translateX / liWidth);
+              scope.swipeIndex = swipedLeft ? index - 1 : index;
+              if (scope.swipeIndex < 0) {
+                scope.swipeIndex = 0;
+              }
               lastTranslateX = scope.swipeIndex * liWidth;
             });
           }
