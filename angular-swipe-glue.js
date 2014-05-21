@@ -6,15 +6,19 @@ angular.module('angular-swipe-glue', ['ngTouch'])
       scope: {
         swipeIndex: '=?'
       },
-      link: function (scope, element) {
+      transclude: true,
+      link: function (scope, element, attrs, controller, transclude) {
         var ulWidth = 0,
-          ulHeight = 0,
           liWidth = 0,
           liCount = 0,
           startMove = 0,
           translateX = 0,
-          lastTranslateX = 0,
           canceled;
+
+        transclude(function(clone) {
+          element.empty();
+          element.append(clone);
+        });
 
         function documentMouseUpEvent(event) {
           endSwipe({
@@ -77,12 +81,9 @@ angular.module('angular-swipe-glue', ['ngTouch'])
             for (var i=0;i<element.children().length;i++) {
               li = element.children()[i];
               ulWidth += li.offsetWidth;
-              if (ulHeight < li.offsetHeight) {
-                ulHeight = li.offsetHeight;
-              }
             }
             element.addClass('swipe-glue');
-            element.css({width: ulWidth + 'px', height: ulHeight + 'px'});
+            element.css({width: ulWidth + 'px'});
           }
         }
 
@@ -110,7 +111,7 @@ angular.module('angular-swipe-glue', ['ngTouch'])
         //Animate
         function move(x) {
           var moveX = x || (scope.swipeIndex * liWidth),
-            translate = "translateX("+(-moveX)+"px)";
+            translate = 'translateX(' + (-moveX) + 'px)';
           if (x) {
             element.removeClass('glue-animation');
           }

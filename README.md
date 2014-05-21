@@ -6,7 +6,7 @@ Demo: http://julienyo.github.io/angular-swipe-glue
 
 ## Usage:
 
-    <ul glue>
+    <ul swipe-glue>
       <li>A</li>
       <li>B</li>
       <li>C</li>
