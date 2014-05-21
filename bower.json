@@ -1,6 +1,7 @@
 {
   "name": "angular-swipe-glue",
   "version": "0.0.0",
+  "app": ".",
   "dependencies": {
     "angular": "~1.2.16",
     "angular-touch": "~1.2.16"

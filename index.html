@@ -9,8 +9,37 @@
     <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="app/styles/main.css">
-    <link rel="stylesheet" href="app/angular-swipe-glue.css">
+    <link rel="stylesheet" href="angular-swipe-glue.css">
+    <style type="text/css">
+      ul {
+        text-align: center;
+      }
+
+      li {
+        width: 200px;
+        height: 200px;
+        background-color: #DDF;
+        border: 1px solid black;
+      }
+
+      .glue-container {
+        width: 606px;
+        overflow-x: hidden;
+        text-align: center;
+      }
+
+      .left {
+        padding: 10px 50px 10px 50px;
+        float: left;
+        cursor: pointer;
+      }
+
+      .right {
+        padding: 10px 50px 10px 50px;
+        float: right;
+        cursor: pointer;
+      }
+    </style>
   </head>
   <body ng-app="angular-swipe-glue">
     <!--[if lt IE 7]>
@@ -44,6 +73,6 @@
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular-touch.min.js"></script>
-    <script src="app/angular-swipe-glue.js"></script>
+    <script src="angular-swipe-glue.js"></script>
 </body>
 </html>
