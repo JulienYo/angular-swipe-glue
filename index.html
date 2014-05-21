@@ -1,49 +1,88 @@
-<!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!DOCTYPE html>
+<html>
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="app/styles/main.css">
-    <link rel="stylesheet" href="app/angular-swipe-glue.css">
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <title>Angular-swipe-glue by JulienYo</title>
   </head>
-  <body ng-app="angular-swipe-glue">
-    <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
-    <div>
-      <h1>angular-swipe-glue</h1>
-      <div class="glue-container">
-        <ul swipe-glue swipe-index="index">
-          <li>A</li>
-          <li>B</li>
-          <li>C</li>
-          <li>D</li>
-          <li>E</li>
-          <li>F</li>
-        </ul>
-        index: <input type="number" min="0" ng-model="index">
-        <span class="left" ng-click="index = index-1">&lt;</span><span class="right" ng-click="index = index+1">&gt;</span>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>Angular-swipe-glue</h1>
+        <h2>Swipe items horizontaly and try to reach nearest item smoothly</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/JulienYo/angular-swipe-glue/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/JulienYo/angular-swipe-glue/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/JulienYo/angular-swipe-glue" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
       </div>
-      <a href="#" ng-click="go = !go">Works behind a ng-show/hide (click to show)</a>
-      <div class="glue-container">
-        <ul ng-show="go" swipe-glue swipe-index="index">
-          <li>A</li>
-          <li>B</li>
-          <li>C</li>
-          <li>D</li>
-          <li>E</li>
-          <li>F</li>
-        </ul>
-      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h1>
+<a name="angular-swipe-glue" class="anchor" href="#angular-swipe-glue"><span class="octicon octicon-link"></span></a>angular-swipe-glue</h1>
+
+<p>Swipe items horizontaly and try to reach nearest item smoothly.</p>
+
+<p>Demo: <a href="http://julienyo.github.io/angular-swipe-glue">http://julienyo.github.io/angular-swipe-glue</a></p>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage:</h2>
+
+<pre><code>&lt;ul glue&gt;
+  &lt;li&gt;A&lt;/li&gt;
+  &lt;li&gt;B&lt;/li&gt;
+  &lt;li&gt;C&lt;/li&gt;
+  &lt;li&gt;D&lt;/li&gt;
+  &lt;li&gt;E&lt;/li&gt;
+  &lt;li&gt;F&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+
+<h3>
+<a name="2way-binding-index-controllers" class="anchor" href="#2way-binding-index-controllers"><span class="octicon octicon-link"></span></a>2way binding index controllers</h3>
+
+<pre><code>&lt;ul swipe-glue swipe-index="index"&gt;
+  &lt;li&gt;A&lt;/li&gt;
+  &lt;li&gt;B&lt;/li&gt;
+  &lt;li&gt;C&lt;/li&gt;
+  &lt;li&gt;D&lt;/li&gt;
+  &lt;li&gt;E&lt;/li&gt;
+  &lt;li&gt;F&lt;/li&gt;
+&lt;/ul&gt;
+index: &lt;input type="number" min="0" ng-model="index"&gt;
+&lt;span ng-click="index = index-1"&gt;&amp;lt;&lt;/span&gt;&lt;span ng-click="index = index+1"&gt;&amp;gt;&lt;/span&gt;
+</code></pre>
+
+<h2>
+<a name="todo" class="anchor" href="#todo"><span class="octicon octicon-link"></span></a>Todo:</h2>
+
+<ul>
+<li> Allow Different sized items</li>
+<li> Allow vertical items</li>
+</ul>
+      </section>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular-touch.min.js"></script>
-    <script src="app/angular-swipe-glue.js"></script>
-</body>
+
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-51207542-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
 </html>
