@@ -98,6 +98,12 @@ angular.module('angular-swipe-glue', ['ngTouch'])
           initContext();
         });
 
+        scope.$watch(function() {
+          return element.children()[0] && element.children()[0].offsetWidth;
+        }, function() {
+          initContext();
+        });
+
         //Move on index update
         scope.$watch('swipeIndex', function(newValue, oldValue) {
           if (scope.swipeIndex < 0 || scope.swipeIndex >= liCount) {
