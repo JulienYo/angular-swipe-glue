@@ -30,5 +30,6 @@ Demo: http://julienyo.github.io/angular-swipe-glue
 
 ## Todo:
 
- -  Allow Different sized items
+ -  Allow different sized items
  -  Allow vertical items
+ -  Allow vertical scrolling on touch device

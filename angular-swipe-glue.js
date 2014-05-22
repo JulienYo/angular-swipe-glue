@@ -21,34 +21,37 @@ angular.module('angular-swipe-glue', ['ngTouch'])
         });
 
         function documentMouseUpEvent(event) {
+          canceled = true;
           endSwipe({
             x: event.clientX,
             y: event.clientY
           });
-          canceled = true;
         }
 
         //End handler
         function endSwipe(coords) {
-          var swipedRight = startMove - coords.x <= 0;
+          var moveX = startMove - coords.x;
           startMove = 0;
-          scope.$apply(function() {
-            var index = Math.ceil(translateX / liWidth);
-            index = swipedRight ? index - 1 : index;
-            //Don't go further than li limits
-            if (index < 0) {
-              index = 0;
-            } else if (index >= liCount) {
-              index = liCount - 1;
-            }
-            var oldIndex = scope.swipeIndex;
-            scope.swipeIndex = index;
-            //Move, watch will do nothing
-            if (oldIndex === scope.swipeIndex) {
-              move();
-            }
-            $document.unbind('mouseup', documentMouseUpEvent);
-          });
+          $document.unbind('mouseup', documentMouseUpEvent);
+          if (moveX) {
+            var swipedRight = moveX < 0;
+            scope.$apply(function() {
+              var index = Math.ceil(translateX / liWidth);
+              index = swipedRight ? index - 1 : index;
+              //Don't go further than li limits
+              if (index < 0) {
+                index = 0;
+              } else if (index >= liCount) {
+                index = liCount - 1;
+              }
+              var oldIndex = scope.swipeIndex;
+              scope.swipeIndex = index;
+              //Move, watch will do nothing
+              if (oldIndex === scope.swipeIndex) {
+                move();
+              }
+            });
+          }
         }
 
         //Swipe handlers
@@ -84,13 +87,16 @@ angular.module('angular-swipe-glue', ['ngTouch'])
             }
             element.addClass('swipe-glue');
             element.css({width: ulWidth + 'px'});
+            scope.swipeIndex = scope.swipeIndex || 0;
+            move();
           }
         }
 
-        //Init index
-        if (angular.isUndefined(scope.swipeIndex) || scope.swipeIndex < 0 || scope.swipeIndex >= liCount) {
-          scope.swipeIndex = 0;
-        }
+        scope.$watch(function() {
+          return element.children()[0] && element.children()[0].offsetWidth;
+        }, function() {
+          initContext();
+        });
 
         //Move on index update
         scope.$watch('swipeIndex', function(newValue, oldValue) {
@@ -100,12 +106,6 @@ angular.module('angular-swipe-glue', ['ngTouch'])
           else {
             move();
           }
-        });
-
-        scope.$watch(function() {
-          return element.children()[0] && element.children()[0].offsetWidth;
-        }, function() {
-          initContext();
         });
 
         //Animate

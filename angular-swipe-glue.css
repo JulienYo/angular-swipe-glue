@@ -1,5 +1,6 @@
 ul.swipe-glue {
   list-style-type: none;
+  display: inline-block;
   padding: 0;
 }
 
