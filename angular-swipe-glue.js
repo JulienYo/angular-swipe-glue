@@ -93,7 +93,7 @@ angular.module('angular-swipe-glue', ['ngTouch'])
         }
 
         scope.$watch(function() {
-          return element.children()[0] && element.children()[0].offsetWidth;
+          return element.children().length;
         }, function() {
           initContext();
         });

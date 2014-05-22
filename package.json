@@ -1,6 +1,6 @@
 {
-  "name": "angularswipeglue",
-  "version": "0.0.0",
+  "name": "angular-swipe-glue",
+  "version": "0.0.1",
   "dependencies": {},
   "devDependencies": {
     "grunt": "~0.4.1",
